@@ -18,8 +18,14 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from temp_app.views import *
 
+
+
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     # url(r'^django_app/', include('django_app.urls')),
     url(r'^$', main_page),
+    # url(r'^create/$', create, name='create'),
+
+ 
+
 ]

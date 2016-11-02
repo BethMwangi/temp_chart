@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %} My Temp Form {% endblock %}
+{% block content %}
+
+<form method="post" action="">{% csrf_token %}
+<p><label for="day">Day:</label><input type="text" name="city"></p>
+<p><label for="temperature">Temperature:</label> <input type="text" name="temp"></p>
+<input type="submit" value="Submit" />
+</form>
+
+{% endblock %}
