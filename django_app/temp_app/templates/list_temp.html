@@ -1,14 +1,51 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+
+    
 {% block title %} My Temp Form {% endblock %}
 {% block content %}
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+ <script type="text/javascript" src="{% static 'js/highcharts/highcharts.js' %}"></script>
+<script src="https://code.highcharts.com"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+ {% load chartit %}
 
 
-{% for temp in temperatures %}
+
+  <script type="text/javascript">
+    $(function () {
+        $.getJSON("{% url 'list_temp' %}", function(data) {
+            $('#container').highcharts(data);
+        });
+    });
+    </script>
+ <h2>Some Line Charts loaded in Ajax!</h2>
+
+<div id="container" style="height: 300px" >{{ tempchart|load_charts:"container" }}</div>
+  
+
+
+<!-- {% for temp in temperatures %}
 
 <div>
 <p>{{ temp.created_date }}</p>
 <p>{{ temp.city_name }}</p>
 <p>{{ temp.temperature }}</p>
 {% endfor %}
-</div>
+</div> -->
+
+
+
+
+
+<canvas id="myChart" width="500" height="300"></canvas>       
+
+
+
 {% endblock %}
+
+
+
+
