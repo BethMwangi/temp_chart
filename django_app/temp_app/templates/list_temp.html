@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} My Temp Form {% endblock %}
+{% block content %}
+
+
+{% for temp in temperatures %}
+
+<div>
+<p>{{ temp.created_date }}</p>
+<p>{{ temp.city_name }}</p>
+<p>{{ temp.temperature }}</p>
+{% endfor %}
+</div>
+{% endblock %}

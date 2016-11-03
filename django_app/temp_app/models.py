@@ -1,12 +1,21 @@
 from __future__ import unicode_literals
 import datetime
 from django.db import models
+from django.utils import timezone
 
 
 class TempChart(models.Model):
 	city_name = models.CharField(max_length=40)
 	temperature = models.IntegerField()
-	date = models.DateTimeField(default=datetime.datetime.now)
+	created_date = models.DateTimeField(default=timezone.now)
 
-	# def __unicode__(self):
-	# 	return self.temperature
+
+
+	class Meta:
+		db_table = "tempchart"
+
+
+	def __repr__(self):
+		return '<%r, %r>' % (self.city_name, self.temperature)
+
+

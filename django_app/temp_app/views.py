@@ -4,68 +4,35 @@ from temp_app.forms import TempForm
 from temp_app.models import TempChart
 from django.views.decorators.csrf import csrf_protect
 import datetime
+from django import forms
+from django.utils import timezone
 
 def main_page(request):
-	form = TempForm()
+
 	if request.method == 'POST':
 		form = TempForm(request.POST or None)
 		if form.is_valid():
-			city_name = request.POST.get('city_name', '')
-			temperature = request.POST.get('temperature', '')
-			date = request.POST.get('date', '')
-			form = TempChart( city_name=city_name, temperature=temperature, date=date)
-			form.save()
+			temp.city_name = form.cleaned_data['city_name']
+			temp.temperature = form.cleaned_data['temperature']
+			temp.save()
 
-			return HttpResponseRedirect('temperatures')
-		# else:
-		# 	form = TempForm()
-			# args = {}
-			# args.update(csrf(request))
+			return HttpResponseRedirect('list_temp')
+	else:
+		form = TempForm()
 
-			# args['form'] = form
+
 	return render(request, 'create.html', {'form': form
 			})
 
 
+def list_temp(request):
+	temperatures = TempChart.objects.all()
+	return render_to_response('list_temp.html', {'temperatures': temperatures})
 
 
 
 
-# 	output = '''
-# 	<html><head><title>%s</title></head>
-# 	<body>
-# 	<h1> %s</h1><p>%s</p>
-# 	</body>
-# 	</html>
-# 	''' % (
-# 		'First Project',
-# 		'I hope it works out perfectly',
-# 		'learning....10%')
 
-# 	return HttpResponse(output)
-
-# def create(request):
-# 	form = TempForm()
-# 	if request.method == 'POST':
-# 		form = TempForm(request.POST or None)
-# 		if form.is_valid():
-# 			city_name = request.POST.get('city_name', '')
-# 			temperature = request.POST.get('temperature', '')
-# 			date = request.POST.get('date', '')
-# 			form = TempChart( city_name=city_name, temperature=temperature, date=date)
-# 			form.save()
-
-# 			return HttpResponseRedirect('temperatures')
-# 		# else:
-# 		# 	form = TempForm()
-# 			# args = {}
-# 			# args.update(csrf(request))
-
-# 			# args['form'] = form
-# 	return render_to_response(request, 'create.html', {'form': form
-# 			})
-# 		# return render(request, 'create_temp.html' , {'form': form
-# 		# 	})
 
 
 
