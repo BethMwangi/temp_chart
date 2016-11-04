@@ -7,8 +7,9 @@ A Django application that takes in temperature and city_name readings over time,
  
  1. As a user I can fill in the form by city_name and temperature
  2. As a user I can view the temperature data in a line graph
- 3. plot charts from models
+ 3. plot charts from models, i.e, lin chart and pie chart
  4. plot data from models on the same axis
+
  
 
  # Dependencies
