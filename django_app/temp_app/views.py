@@ -45,7 +45,7 @@ def list_temp(request):
 	
 	# create chart object
 
-	cht = Chart(
+	cht_1 = Chart(
 		datasource = tempdata,
 		series_options = 
 		[{'options':{
@@ -63,9 +63,41 @@ def list_temp(request):
 		'text': 'City_name'}}})
 
 
+	# crete a datapool with the data we want to retrieve to create a pie chart
+	ds = DataPool(
+		series= [{'options': {
+		'source':TempChart.objects.all()},
+		'terms': [
+		'city_name',
+		'temperature',
+		'created_date']}
+		])
+
+	def cityname(city_num):
+		names = {1: 'Nairobi', 2: 'Kampala', 3: 'London', 4: '', 5: ''}
+		return names[city_num]
+
+
+	cht_2 = Chart(
+		datasource = ds,
+		series_options = 
+		[{'options':{
+		'type': 'pie',
+		'stacking': False},
+		'terms':{
+		'city_name': [
+		'temperature']
+		}}],
+		chart_options = 
+		{'title': {
+		'text': 'Temp Data by City_name'},
+		'title' : {
+		'text': 'City_name'}})
+
+
 	# Send the chart object to the template.
 
-	return render_to_response('list_temp.html', {'tempchart':cht})
+	return render_to_response('list_temp.html', {'tempchart': [cht_1, cht_2], })
 
 
 

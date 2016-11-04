@@ -17,14 +17,19 @@
   <script type="text/javascript">
     $(function () {
         $.getJSON("{% url 'list_temp' %}", function(data) {
-            $('#container').highcharts(data);
+            $('#container', '#cont').highcharts(data);
         });
     });
     </script>
  <h2>Line Charts loaded in Ajax!</h2>
 
 <div id="container" style="height: 300px" >{{ tempchart|load_charts:"container" }}</div>
-  
+
+<h2>Pie  Chart Goes Here! </h2>
+
+ <div id="cont" style="height: 300px" >{{ tempchart|load_charts:"cont" }}</div> 
+
+
 
 
 <!-- {% for temp in temperatures %}
