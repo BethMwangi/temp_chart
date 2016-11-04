@@ -1,0 +1,5 @@
+Django==1.10.3
+argparse==1.2.1
+django-chartjs==1.1
+six==1.10.0
+wsgiref==0.1.2

@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 import datetime
 from django.db import models
+
 from django.utils import timezone
 
 
@@ -14,8 +15,12 @@ class TempChart(models.Model):
 	class Meta:
 		db_table = "tempchart"
 
+	
+
 
 	def __repr__(self):
-		return '<%r, %r>' % (self.city_name, self.temperature)
+		return '<%r, %r>' % (self.city_name, self.temperature, self.created_date)
+
+
 
 

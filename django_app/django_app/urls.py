@@ -18,12 +18,13 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from temp_app.views import *
 from temp_app.views import list_temp
+import temp_app
 
 
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
-    url(r'^$', main_page),
-    url(r'^list_temp/$', list_temp, name='list_temp'),
+    url(r'^$', temp_app.views.main_page ,name='main_page'),
+    url(r'^list_temp/$', temp_app.views.list_temp , name='list_temp'),
 
     ]

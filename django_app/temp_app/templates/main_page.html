@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} My Temp Form {% endblock %}
+{% block content %}
+<h2> Add the Temperature </h2>
+<form id="TempChartForm" method="post" action="/list_temp/">
+{% csrf_token %}
+<p><label for="city_name">City_Name:</label><input type="text" name="city_name"></p>
+<p><label for="temperature">Temperature:</label><input type="text" name="temperature"></p>
+<input type="submit" value="Submit" />
+<!--  {{ form.as_p }}
+    <input type="submit" value="Submit" /> -->
+
+
+
+</form>
+
+{% endblock %}

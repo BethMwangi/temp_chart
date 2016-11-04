@@ -1,12 +1,10 @@
 from django.shortcuts import render, render_to_response
 from django.http import HttpResponse,  HttpResponseRedirect
-from temp_app.forms import TempForm
-from temp_app.models import TempChart
 from django.views.decorators.csrf import csrf_protect
-import datetime
-from django import forms
 from django.utils import timezone
 from random import randint
+from temp_app.forms import TempChartForm
+from temp_app.models import TempChart
 from django.views.generic import TemplateView
 from chartjs.views.lines import BaseLineChartView
 from chartit import DataPool, Chart
@@ -14,27 +12,24 @@ from chartit import DataPool, Chart
 
 
 def main_page(request):
-
 	if request.method == 'POST':
-		form = TempForm(request.POST or None)
+		form = TempChartForm(request.POST)
 		if form.is_valid():
-			temp.city_name = form.cleaned_data['city_name']
-			temp.temperature = form.cleaned_data['temperature']
-			temp.save()
-
-			return HttpResponseRedirect('list_temp')
+			request.session['text'] = form.cleaned_data['city_name']
+			# temp = form.save(commit=False)
+			# temp.city_name = form.cleaned_data['city_name']
+			# temp.temperature = form.cleaned_data['temperature']
+			# temp = TempChart(city_name=city_name, temperature=temperature)
+			
+			# temp.save()
+			
+			return HttpResponseRedirect('/list_temp') #redirect after POST
 	else:
-		form = TempForm()
-
-
-	return render(request, 'create.html', {'form': form
+		form = TempChartForm()
+	return render(request, 'main_page.html', {'form': form
 			})
 
 
-# def list_temp(request):
-# 	temperatures = TempChart.objects.all()
-# 	return render_to_response('list_temp.html', {'temperatures': temperatures})
-# 	# return HttpResponse(json.dumps(data))
 
 
 def list_temp(request):
@@ -58,8 +53,7 @@ def list_temp(request):
 		'stacking': False},
 		'terms':{
 		'city_name': [
-		'temperature',
-		'created_date']
+		'temperature']
 		}}],
 		chart_options = 
 		{'title': {
@@ -70,7 +64,7 @@ def list_temp(request):
 
 
 	# Send the chart object to the template.
-	# return render_to_response({'list_temp': cht})
+
 	return render_to_response('list_temp.html', {'tempchart':cht})
 
 
