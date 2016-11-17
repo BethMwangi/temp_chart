@@ -13,14 +13,17 @@ from chartit import DataPool, Chart
 
 
 
+
 def main_page(request):
 	form = TempChartForm
-	if request.POST:
+	if request.method == 'POST':
 		form = TempChartForm(request.POST)
-		if form.is_valid():
-			temp = form.save(commit=False)
-			temp.save()
-			return redirect( 'list_temp.html')
+		temp = f.save()
+		t = TempChart.objects.get(pk=1)
+		temp = TempChartForm(request.POST, instance = t)
+		t.save()
+			
+			# return redirect( 'list_temp.html')
 	
 	return render(request, 'main_page.html', {'form': form
 			})

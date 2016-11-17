@@ -2,7 +2,7 @@
 {% block title %} My Temp Form {% endblock %}
 {% block content %}
 <h2> Add the Temperature </h2>
-<form  id="TempChartForm" method="POST" action="/list_temp/">
+<form  id="TempForm" method="POST" action="/list_temp/">
 {% csrf_token %}
     {{form}}
 
