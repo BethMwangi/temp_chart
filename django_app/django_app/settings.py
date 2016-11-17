@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'temp_app.apps.TempAppConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +40,8 @@ INSTALLED_APPS = [
     'chartjs',
     'chartit',
     'jquery',
+    'temp_app'
+
    
     
 ]
@@ -81,11 +82,17 @@ WSGI_APPLICATION = 'django_app.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3').replace('\\', '/'),
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_app',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        },
+        'USER': 'django_appuser',
+        'PASSWORD': 'password101',
+        'HOST': 'localhost',
+        'PORT': '',
 }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators

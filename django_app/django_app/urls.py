@@ -19,6 +19,8 @@ from django.contrib import admin
 from temp_app.views import *
 from temp_app.views import list_temp
 import temp_app
+from temp_app import views, models
+from django.views.generic import TemplateView
 
 
 

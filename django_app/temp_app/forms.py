@@ -1,11 +1,11 @@
 from django import forms
-from models import TempChart
+from temp_app.models import TempChart
+from views import *
 
 
 class TempChartForm(forms.Form):
 	"""docstring for TempForm"""
 
-	city_name = forms.CharField(max_length=50)
 	temperature = forms.IntegerField()
 	
 
